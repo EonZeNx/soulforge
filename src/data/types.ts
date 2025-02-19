@@ -57,6 +57,7 @@ export type Tag = {
 
 export type TagReference = {
   id: number; // references a TagId
+  stacks: number;
 };
 
 export type Aspiration = {
@@ -176,7 +177,7 @@ export type Character = {
   archetype: CharacterArchetype;
   kinfolk: CharacterKinfolk;
   traits: CharacterTrait[];
-  temporary_tags: number[]; // references TagId
+  temporary_tags: TagReference[];
   afflictions: number[]; // references AfflictionId
   resources: CharacterResources;
 };

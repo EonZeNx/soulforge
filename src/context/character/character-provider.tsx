@@ -386,9 +386,6 @@ export function CharacterProvider({ children }: Props) {
       return;
     }
 
-    console.debug("characters[index].kinfolk", characters[index].kinfolk);
-
-    // todo: bug here
     characters[index].kinfolk.tags = ids.map(id => {
       const matchingAbilities = characters[index].kinfolk.tags.filter(a => ids.indexOf(a.id) >= 0);
       const existingAbility = matchingAbilities.length > 0
@@ -444,6 +441,44 @@ export function CharacterProvider({ children }: Props) {
   ]);
 
 
+
+  const updateTemporaryTag = useCallback((id: number, stacks?: number) => {
+    const index = getSelectedCharacterIndex();
+
+    if (index < 0) {
+      console.error(`failed to find character with id ${selectedCharacter}`);
+      return;
+    }
+
+    const safeStacks = stacks !== undefined && stacks !== null
+      ? stacks : 1;
+
+    let tagIndex = characters[index].temporary_tags.findIndex(tt => tt.id === id);
+    if (tagIndex >= 0) {
+      characters[index].temporary_tags[tagIndex].stacks += safeStacks;
+    }
+    else {
+      characters[index].temporary_tags.push({
+        id: id,
+        stacks: safeStacks,
+      });
+
+      tagIndex = characters[index].temporary_tags.length - 1;
+    }
+
+    if (characters[index].temporary_tags[tagIndex].stacks <= 0) {
+      characters[index].temporary_tags.splice(tagIndex, 1);
+    }
+
+    charactersUpdate(characters);
+  }, [
+    characters,
+    charactersUpdate,
+    selectedCharacter,
+    getSelectedCharacterIndex
+  ]);
+
+
   const memo = useMemo(() => {
     const index = getSelectedCharacterIndex();
     const character = index < 0 ? null : characters[index];
@@ -476,7 +511,9 @@ export function CharacterProvider({ children }: Props) {
 
       updateKinfolk: updateKinfolk,
       updateAllKinfolkAbilities: updateAllKinfolkAbilities,
-      updateKinfolkAbility: updateKinfolkAbility
+      updateKinfolkAbility: updateKinfolkAbility,
+
+      updateTemporaryTag: updateTemporaryTag
     };
   }, [
     characters,
@@ -504,7 +541,9 @@ export function CharacterProvider({ children }: Props) {
 
     updateKinfolk,
     updateAllKinfolkAbilities,
-    updateKinfolkAbility
+    updateKinfolkAbility,
+
+    updateTemporaryTag
   ]);
 
   return (

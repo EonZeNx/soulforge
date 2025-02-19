@@ -42,4 +42,6 @@ export type CharacterContextProps = {
   // Traits
   // updateTrait: (oldId: number, newId: number) => void;
   // updateTraitAbility: (id: number, value: {unlocked?: boolean, exhausted?: boolean}) => void;
+
+  updateTemporaryTag: (id: number, stacks?: number) => void;
 } & CharacterValueProps;

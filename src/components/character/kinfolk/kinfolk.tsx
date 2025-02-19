@@ -13,6 +13,8 @@ import {useCharacterContext} from "@/context/character/character-context";
 import {SoulforgeCard} from "@/components/soulforge-card";
 import {CharacterTagCard} from "@/components/character/character-tag-card";
 import {useBreakpointMediaQuery} from "@/hooks/use-screen-breakpoints";
+import {keystones} from "@/data/v1/keystones";
+import {kinfolks} from "@/data/v1/kinfolks";
 
 type Props = {
   sx?: SxProps;
@@ -24,6 +26,23 @@ export function Kinfolk({sx}: Props) {
   const isSmall = useBreakpointMediaQuery(theme.breakpoints.down("sm"));
 
   const cardSize = !isSmall ? 4 : 12;
+
+  const kinfolk = kinfolks.find(a => a.id === character.character?.kinfolk.id);
+
+  const title = (
+    <Typography variant="h5" color="textPrimary">
+      {(kinfolk?.name !== null && kinfolk?.name !== undefined) && (kinfolk.name ?? '').length !== 0
+        ? kinfolk.name : "Keystone"}
+    </Typography>
+  );
+  const subtitle = (
+    (kinfolk?.name !== null && kinfolk?.name !== undefined) && (kinfolk.name ?? '').length !== 0
+      ? (
+        <Typography variant="body1" color="textSecondary">
+          Keystone
+        </Typography>
+      ) : null
+  );
 
   const abilityInfo = (character.character?.kinfolk.tags ?? []).length !== 0
     ? (
@@ -52,12 +71,10 @@ export function Kinfolk({sx}: Props) {
   return (
     <Box sx={sx}>
       <Stack justifyContent="space-between" direction="row">
-        <Typography
-          variant="h5"
-          component="h5"
-        >
-          Kinfolk
-        </Typography>
+        <Stack spacing={0}>
+          {title}
+          {subtitle}
+        </Stack>
 
         <KinfolkModal/>
       </Stack>
