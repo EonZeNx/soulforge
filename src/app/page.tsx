@@ -66,24 +66,33 @@ export default function Home() {
   const mediumLayout = (<>
     <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
       <TabList onChange={handleChange}>
-        <Tab label="Core" value="1"/>
-        <Tab label="Self" value="2"/>
-        <Tab label="Status" value="3"/>
+        <Tab label="Character" value="1"/>
+        <Tab label="Keystone" value="2"/>
+        <Tab label="Archetype" value="3"/>
+        <Tab label="Kinfolk" value="4"/>
+        <Tab label="Status" value="5"/>
       </TabList>
     </Box>
 
     <TabPanel value="1">
       <Lore/>
       <Resources sx={{mt: 4}}/>
-      <Keystone sx={{mt: 4}}/>
     </TabPanel>
 
     <TabPanel value="2">
-      <CharacterArchetype/>
-      <Kinfolk sx={{mt: 4}}/>
+      <Keystone/>
     </TabPanel>
 
     <TabPanel value="3">
+      <CharacterArchetype/>
+    </TabPanel>
+
+    <TabPanel value="4">
+      <Kinfolk/>
+    </TabPanel>
+
+    <TabPanel value="5">
+
       <Grid container spacing={2}>
         <Grid size={6}>
           <TemporaryTags/>
