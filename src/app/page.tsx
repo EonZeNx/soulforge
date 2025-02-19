@@ -4,7 +4,7 @@ import {TabContext, TabList, TabPanel} from "@mui/lab";
 import {Box, Card, Tab, useTheme} from "@mui/material";
 import {SyntheticEvent, useState} from "react";
 import {Lore} from "@/components/character/lore";
-import {CharacterArchetype} from "@/components/character/archetypes/character-archetype";
+import {Archetype} from "@/components/character/archetypes/archetype";
 import {Keystone} from "@/components/character/keystones/keystone";
 import {Kinfolk} from "@/components/character/kinfolk/kinfolk";
 import {TemporaryTags} from "@/components/character/temporary_tags";
@@ -47,7 +47,7 @@ export default function Home() {
     </TabPanel>
 
     <TabPanel value="3">
-      <CharacterArchetype/>
+      <Archetype/>
     </TabPanel>
 
     <TabPanel value="4">
@@ -84,7 +84,7 @@ export default function Home() {
     </TabPanel>
 
     <TabPanel value="3">
-      <CharacterArchetype/>
+      <Archetype/>
     </TabPanel>
 
     <TabPanel value="4">

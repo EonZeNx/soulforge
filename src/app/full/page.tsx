@@ -2,7 +2,7 @@
 
 import {Lore} from "@/components/character/lore";
 import {Keystone} from "@/components/character/keystones/keystone";
-import {CharacterArchetype} from "@/components/character/archetypes/character-archetype";
+import {Archetype} from "@/components/character/archetypes/archetype";
 import {Kinfolk} from "@/components/character/kinfolk/kinfolk";
 import {TemporaryTags} from "@/components/character/temporary_tags";
 import {Afflictions} from "@/components/character/afflictions";
@@ -27,7 +27,7 @@ export default function Full() {
             <Lore/>
             <Resources/>
             <Keystone/>
-            <CharacterArchetype/>
+            <Archetype/>
             <Kinfolk/>
 
             <Grid container spacing={2}>

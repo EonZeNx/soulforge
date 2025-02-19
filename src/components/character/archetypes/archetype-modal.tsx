@@ -13,7 +13,7 @@ const style = {
   maxHeight: '80vh',
 };
 
-export function CharacterArchetypeModal() {
+export function ArchetypeModal() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);

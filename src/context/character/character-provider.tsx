@@ -7,6 +7,7 @@ import {useLocalStorage} from "usehooks-ts";
 import {DEFAULT_CHARACTER, DEFAULT_CHARACTER_ABILITY} from "@/data/defaults";
 import {archetypes} from "@/data/v1/archetypes";
 import {keystones} from "@/data/v1/keystones";
+import {kinfolks} from "@/data/v1/kinfolks";
 
 
 const CHARACTER_STORAGE_KEY = 'characters';
@@ -348,6 +349,35 @@ export function CharacterProvider({ children }: Props) {
 
 
   // Kinfolk
+  const updateKinfolk = useCallback((id: number) => {
+    const index = getSelectedCharacterIndex();
+
+    if (index < 0) {
+      console.error(`failed to find character with id ${selectedCharacter}`);
+      return;
+    }
+
+    characters[index].kinfolk.id = id;
+
+    const kinfolk = kinfolks.find(a => a.id === id);
+    if (kinfolk === undefined || kinfolk === null) {
+      console.error(`failed to find archetype with id ${id}`);
+      return;
+    }
+
+    characters[index].kinfolk.tags = kinfolk.tags.map(a => ({
+      id: a.id,
+      unlocked: true,
+      exhausted: false,
+    }));
+
+    charactersUpdate(characters);
+  }, [
+    characters,
+    charactersUpdate,
+    selectedCharacter,
+    getSelectedCharacterIndex
+  ]);
   const updateAllKinfolkAbilities = useCallback((ids: number[]) => {
     const index = getSelectedCharacterIndex();
 
@@ -355,6 +385,8 @@ export function CharacterProvider({ children }: Props) {
       console.error(`failed to find character with id ${selectedCharacter}`);
       return;
     }
+
+    console.debug("characters[index].kinfolk", characters[index].kinfolk);
 
     // todo: bug here
     characters[index].kinfolk.tags = ids.map(id => {
@@ -442,6 +474,7 @@ export function CharacterProvider({ children }: Props) {
       updateArchetype: updateArchetype,
       updateArchetypeAbility: updateArchetypeAbility,
 
+      updateKinfolk: updateKinfolk,
       updateAllKinfolkAbilities: updateAllKinfolkAbilities,
       updateKinfolkAbility: updateKinfolkAbility
     };
@@ -469,6 +502,7 @@ export function CharacterProvider({ children }: Props) {
     updateArchetype,
     updateArchetypeAbility,
 
+    updateKinfolk,
     updateAllKinfolkAbilities,
     updateKinfolkAbility
   ]);

@@ -9,7 +9,7 @@ import {
   SxProps, useTheme
 } from "@mui/material";
 import Grid from '@mui/material/Grid2';
-import {CharacterArchetypeModal} from "@/components/character/archetypes/character-archetype-modal";
+import {ArchetypeModal} from "@/components/character/archetypes/archetype-modal";
 import {useCharacterContext} from "@/context/character/character-context";
 import {archetypes} from "@/data/v1/archetypes";
 import {CharacterTagCard} from "@/components/character/character-tag-card";
@@ -19,7 +19,7 @@ type Props = {
   sx?: SxProps;
 };
 
-export function CharacterArchetype({sx}: Props) {
+export function Archetype({sx}: Props) {
   const character = useCharacterContext();
   const theme = useTheme();
   const isSmall = useBreakpointMediaQuery(theme.breakpoints.down("sm"));
@@ -76,7 +76,7 @@ export function CharacterArchetype({sx}: Props) {
           {subtitle}
         </Stack>
 
-        <CharacterArchetypeModal/>
+        <ArchetypeModal/>
       </Stack>
 
       <Grid container spacing={2} sx={{mt: 2}}>

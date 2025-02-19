@@ -1,6 +1,6 @@
 import {Kinfolk} from "@/data/types";
 
-export const kinfolk: Kinfolk[] = [
+export const kinfolks: Kinfolk[] = [
   {
     id: 1,
     name: "Humanfolk",
