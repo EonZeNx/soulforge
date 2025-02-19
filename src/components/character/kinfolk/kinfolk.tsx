@@ -8,7 +8,7 @@ import {
   SxProps, useTheme
 } from "@mui/material";
 import Grid from '@mui/material/Grid2';
-import {KinfolkModal} from "@/components/character/kinfolk_modal";
+import {KinfolkModal} from "@/components/character/kinfolk/kinfolk-modal";
 import {useCharacterContext} from "@/context/character/character-context";
 import {SoulforgeCard} from "@/components/soulforge-card";
 import {CharacterTagCard} from "@/components/character/character-tag-card";

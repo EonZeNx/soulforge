@@ -6,7 +6,7 @@ import {SyntheticEvent, useState} from "react";
 import {Lore} from "@/components/character/lore";
 import {CharacterArchetype} from "@/components/character/archetypes/character-archetype";
 import {Keystone} from "@/components/character/keystones/keystone";
-import {Kinfolk} from "@/components/character/kinfolk";
+import {Kinfolk} from "@/components/character/kinfolk/kinfolk";
 import {TemporaryTags} from "@/components/character/temporary_tags";
 import {Afflictions} from "@/components/character/afflictions";
 import Grid from "@mui/material/Grid2";
@@ -92,7 +92,6 @@ export default function Home() {
     </TabPanel>
 
     <TabPanel value="5">
-
       <Grid container spacing={2}>
         <Grid size={6}>
           <TemporaryTags/>
