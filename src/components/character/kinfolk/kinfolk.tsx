@@ -13,7 +13,6 @@ import {useCharacterContext} from "@/context/character/character-context";
 import {SoulforgeCard} from "@/components/soulforge-card";
 import {CharacterTagCard} from "@/components/character/character-tag-card";
 import {useBreakpointMediaQuery} from "@/hooks/use-screen-breakpoints";
-import {keystones} from "@/data/v1/keystones";
 import {kinfolks} from "@/data/v1/kinfolks";
 
 type Props = {

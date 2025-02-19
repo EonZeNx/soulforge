@@ -2,12 +2,13 @@
 
 import {PropsWithChildren, useCallback, useMemo} from "react";
 import {CharacterContext} from "@/context/character/character-context";
-import {Character} from "@/data/types";
+import {Character, TemporaryTag} from "@/data/types";
 import {useLocalStorage} from "usehooks-ts";
 import {DEFAULT_CHARACTER, DEFAULT_CHARACTER_ABILITY} from "@/data/defaults";
 import {archetypes} from "@/data/v1/archetypes";
 import {keystones} from "@/data/v1/keystones";
 import {kinfolks} from "@/data/v1/kinfolks";
+import {isNull} from "@/libraries/general";
 
 
 const CHARACTER_STORAGE_KEY = 'characters';
@@ -442,7 +443,28 @@ export function CharacterProvider({ children }: Props) {
 
 
 
-  const updateTemporaryTag = useCallback((id: number, stacks?: number) => {
+  const addTemporaryTag = useCallback((temporaryTag: TemporaryTag) => {
+    const index = getSelectedCharacterIndex();
+
+    if (index < 0) {
+      console.error(`failed to find character with id ${selectedCharacter}`);
+      return -1;
+    }
+
+    characters[index].temporary_tags.push(temporaryTag);
+    const tagIndex = characters[index].temporary_tags.length - 1;
+
+    charactersUpdate(characters);
+
+    return tagIndex;
+  }, [
+    characters,
+    charactersUpdate,
+    selectedCharacter,
+    getSelectedCharacterIndex
+  ]);
+
+  const updateTemporaryTag = useCallback((temporaryTagIndex: number, temporaryTag: TemporaryTag) => {
     const index = getSelectedCharacterIndex();
 
     if (index < 0) {
@@ -450,24 +472,22 @@ export function CharacterProvider({ children }: Props) {
       return;
     }
 
-    const safeStacks = stacks !== undefined && stacks !== null
-      ? stacks : 1;
+    if (temporaryTagIndex < 0 || temporaryTagIndex >= characters[index].temporary_tags.length) {
+      console.error(`index ${temporaryTagIndex} outside temporary tag bounds`);
+      return;
+    }
 
-    let tagIndex = characters[index].temporary_tags.findIndex(tt => tt.id === id);
-    if (tagIndex >= 0) {
-      characters[index].temporary_tags[tagIndex].stacks += safeStacks;
+    characters[index].temporary_tags[temporaryTagIndex].stacks += temporaryTag.stacks;
+
+    if (characters[index].temporary_tags[temporaryTagIndex].stacks > 0) {
+      characters[index].temporary_tags[temporaryTagIndex].id = temporaryTag.id;
+
+      if (isNull(temporaryTag.id)) {
+        characters[index].temporary_tags[temporaryTagIndex].data = temporaryTag.data;
+      }
     }
     else {
-      characters[index].temporary_tags.push({
-        id: id,
-        stacks: safeStacks,
-      });
-
-      tagIndex = characters[index].temporary_tags.length - 1;
-    }
-
-    if (characters[index].temporary_tags[tagIndex].stacks <= 0) {
-      characters[index].temporary_tags.splice(tagIndex, 1);
+      characters[index].temporary_tags.splice(temporaryTagIndex, 1);
     }
 
     charactersUpdate(characters);
@@ -513,7 +533,8 @@ export function CharacterProvider({ children }: Props) {
       updateAllKinfolkAbilities: updateAllKinfolkAbilities,
       updateKinfolkAbility: updateKinfolkAbility,
 
-      updateTemporaryTag: updateTemporaryTag
+      addTemporaryTag: addTemporaryTag,
+      updateTemporaryTag: updateTemporaryTag,
     };
   }, [
     characters,
@@ -543,7 +564,8 @@ export function CharacterProvider({ children }: Props) {
     updateAllKinfolkAbilities,
     updateKinfolkAbility,
 
-    updateTemporaryTag
+    addTemporaryTag,
+    updateTemporaryTag,
   ]);
 
   return (

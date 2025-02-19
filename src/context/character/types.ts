@@ -1,4 +1,4 @@
-import {Character} from "@/data/types";
+import {Character, TemporaryTag} from "@/data/types";
 
 export type CharacterValueProps = {
   character: Character | null;
@@ -7,6 +7,11 @@ export type CharacterValueProps = {
     name: string;
   }[];
 };
+
+export enum EIdOrIndex {
+  ID,
+  INDEX
+}
 
 export type CharacterContextProps = {
   updateSelectedCharacter: (id: number) => void;
@@ -43,5 +48,6 @@ export type CharacterContextProps = {
   // updateTrait: (oldId: number, newId: number) => void;
   // updateTraitAbility: (id: number, value: {unlocked?: boolean, exhausted?: boolean}) => void;
 
-  updateTemporaryTag: (id: number, stacks?: number) => void;
+  addTemporaryTag: (temporaryTag: TemporaryTag) => number;
+  updateTemporaryTag: (temporaryTagIndex: number, temporaryTag: TemporaryTag) => void;
 } & CharacterValueProps;
