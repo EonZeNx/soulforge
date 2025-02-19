@@ -19,6 +19,7 @@ import {coreValues} from "@/data/v1/core_values";
 import {vices} from "@/data/v1/vices";
 import {SoulforgeCard} from "@/components/soulforge-card";
 import {useBreakpointMediaQuery} from "@/hooks/use-screen-breakpoints";
+import {SelectRenderSubtitle} from "@/components/select-render-subtitle";
 
 type Props = {
   sx?: SxProps;
@@ -88,52 +89,30 @@ export function Lore({sx}: Props) {
   );
 
   const aspirationSelect = (
-    <FormControl size="small" fullWidth>
-      <InputLabel>Aspiration</InputLabel>
-      <Select
-        label="Aspiration"
-        variant="outlined"
-        value={character.character?.lore.aspiration.id}
-        onChange={e => updateAspiration(e.target.value)}
-      >
-        <MenuItem value="-1">Custom</MenuItem>
-        {aspirations.map(a => (
-          <MenuItem key={a.id} value={a.id}><strong>{a.name}:</strong> {a.description}</MenuItem>
-        ))}
-      </Select>
-    </FormControl>
+    <SelectRenderSubtitle
+      label="Aspiration"
+      value={character.character?.lore.aspiration.id ?? -1}
+      updateValue={updateAspiration}
+      valueList={aspirations}
+    />
   );
+
   const coreValueSelect = (
-    <FormControl size="small" fullWidth>
-      <InputLabel>Core Value</InputLabel>
-      <Select
-        label="Core Value"
-        variant="outlined"
-        value={character.character?.lore.core_value.id}
-        onChange={e => updateCoreValue(e.target.value)}
-      >
-        <MenuItem value="-1">Custom</MenuItem>
-        {coreValues.map(a => (
-          <MenuItem key={a.id} value={a.id}><strong>{a.name}:</strong> {a.description}</MenuItem>
-        ))}
-      </Select>
-    </FormControl>
+    <SelectRenderSubtitle
+      label="Core Value"
+      value={character.character?.lore.core_value.id ?? -1}
+      updateValue={updateCoreValue}
+      valueList={coreValues}
+    />
   );
+
   const viceSelect = (
-    <FormControl size="small" fullWidth>
-      <InputLabel>Vice</InputLabel>
-      <Select
-        label="Vice"
-        variant="outlined"
-        value={character.character?.lore.vice.id}
-        onChange={e => updateVice(e.target.value)}
-      >
-        <MenuItem value="-1">Custom</MenuItem>
-        {vices.map(a => (
-          <MenuItem key={a.id} value={a.id}><strong>{a.name}:</strong> {a.description}</MenuItem>
-        ))}
-      </Select>
-    </FormControl>
+    <SelectRenderSubtitle
+      label="Vice"
+      value={character.character?.lore.vice.id ?? -1}
+      updateValue={updateVice}
+      valueList={vices}
+    />
   );
 
   const aspirationNoteTextField = (
