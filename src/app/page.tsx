@@ -28,7 +28,7 @@ export default function Home() {
   const smallLayout = (<>
     <Box sx={{borderBottom: 1, borderColor: 'divider'}}>
       <TabList onChange={handleChange} variant="scrollable" scrollButtons="auto">
-        <Tab label="Lore" value="1"/>
+        <Tab label="Character" value="1"/>
         <Tab label="Keystone" value="2"/>
         <Tab label="Archetype" value="3"/>
         <Tab label="Kinfolk" value="4"/>
@@ -107,7 +107,7 @@ export default function Home() {
   return (
     <CharacterProvider>
       <main style={{maxWidth: "100%", margin: theme.spacing(2), display: "flex", justifyContent: "center"}}>
-        <Box sx={{maxWidth: isSmall ? "100%" : "1000px"}}>
+        <Box sx={{width: "100%", maxWidth: isSmall ? "100%" : "1000px"}}>
           <MainHeader isSmall={isSmall}/>
 
           <TabContext value={value}>
