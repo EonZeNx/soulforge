@@ -60,6 +60,8 @@ export function Resource({ value, renderIcon, name, onUpdate }: Props) {
               minWidth: "20px",
               textAlign: "center"
             }}
+            variant="body1"
+            fontWeight="bold"
           >
             {value}
           </Typography>
