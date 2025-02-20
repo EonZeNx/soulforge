@@ -17,15 +17,15 @@ export type CharacterContextProps = {
   updateSelectedCharacter: (id: number) => void;
 
   // Lore
-  updateName: (value: string) => void;
   updateTrueName: (value: string) => void;
   updateAspiration: (id: number) => void;
   updateCoreValue: (id: number) => void;
   updateVice: (id: number) => void;
+  updateNotes: (value: string) => void;
 
-  updateAspirationNote: (value: string) => void;
-  updateCoreValueNote: (value: string) => void;
-  updateViceNote: (value: string) => void;
+  // Attributes
+  updateAttributeValue: (id: number, value: number) => void;
+  updateAttributeFlow: (id: number, flow: number) => void;
 
   // Resources
   updateFate: (value: number) => void;

@@ -16,6 +16,7 @@ import {vices} from "@/data/v1/vices";
 import {SoulforgeCard} from "@/components/soulforge-card";
 import {useBreakpointMediaQuery} from "@/hooks/use-screen-breakpoints";
 import {SelectRenderSubtitle} from "@/components/select-render-subtitle";
+import {Notes} from "@/components/character/notes";
 
 type Props = {
   sx?: SxProps;
@@ -68,7 +69,7 @@ export function Lore({sx}: Props) {
       size="small"
       fullWidth
       value={character.character?.lore.name}
-      onChange={e => character.updateName(e.target.value)}
+      onChange={e => character.updateNotes(e.target.value)}
     />
   );
 
@@ -87,7 +88,7 @@ export function Lore({sx}: Props) {
   const aspirationSelect = (
     <SelectRenderSubtitle
       label="Aspiration"
-      value={character.character?.lore.aspiration.id ?? -1}
+      value={character.character?.lore.aspiration ?? -1}
       updateValue={updateAspiration}
       valueList={aspirations}
     />
@@ -96,7 +97,7 @@ export function Lore({sx}: Props) {
   const coreValueSelect = (
     <SelectRenderSubtitle
       label="Core Value"
-      value={character.character?.lore.core_value.id ?? -1}
+      value={character.character?.lore.core_value ?? -1}
       updateValue={updateCoreValue}
       valueList={coreValues}
     />
@@ -105,52 +106,9 @@ export function Lore({sx}: Props) {
   const viceSelect = (
     <SelectRenderSubtitle
       label="Vice"
-      value={character.character?.lore.vice.id ?? -1}
+      value={character.character?.lore.vice ?? -1}
       updateValue={updateVice}
       valueList={vices}
-    />
-  );
-
-  const aspirationNoteTextField = (
-    <TextField
-      label="Aspiration notes"
-      variant="outlined"
-      margin="dense"
-      size="small"
-      multiline
-      minRows={3}
-      maxRows={6}
-      fullWidth
-      value={character.character?.lore.aspiration.note}
-      onChange={e => character.updateAspirationNote(e.target.value)}
-    />
-  );
-  const coreValueNoteTextField = (
-    <TextField
-      label="Core Value notes"
-      variant="outlined"
-      margin="dense"
-      size="small"
-      multiline
-      minRows={3}
-      maxRows={6}
-      fullWidth
-      value={character.character?.lore.core_value.note}
-      onChange={e => character.updateCoreValueNote(e.target.value)}
-    />
-  );
-  const viceNoteTextField = (
-    <TextField
-      label="Vice notes"
-      variant="outlined"
-      margin="dense"
-      size="small"
-      multiline
-      minRows={3}
-      maxRows={6}
-      fullWidth
-      value={character.character?.lore.vice.note}
-      onChange={e => character.updateViceNote(e.target.value)}
     />
   );
 
@@ -165,30 +123,22 @@ export function Lore({sx}: Props) {
       </SoulforgeCard>
     </Grid>
 
-
     <Grid size={12}>
       <SoulforgeCard>
         <CardContent>
-          {aspirationSelect}
-          {aspirationNoteTextField}
-        </CardContent>
-      </SoulforgeCard>
-    </Grid>
+          <Grid container spacing={2}>
+            <Grid size={12}>
+              {aspirationSelect}
+            </Grid>
 
-    <Grid size={12}>
-      <SoulforgeCard>
-        <CardContent>
-          {coreValueSelect}
-          {coreValueNoteTextField}
-        </CardContent>
-      </SoulforgeCard>
-    </Grid>
+            <Grid size={12}>
+              {coreValueSelect}
+            </Grid>
 
-    <Grid size={12}>
-      <SoulforgeCard>
-        <CardContent>
-          {viceSelect}
-          {viceNoteTextField}
+            <Grid size={12}>
+              {viceSelect}
+            </Grid>
+          </Grid>
         </CardContent>
       </SoulforgeCard>
     </Grid>
@@ -204,30 +154,22 @@ export function Lore({sx}: Props) {
       </SoulforgeCard>
     </Grid>
 
-
-    <Grid size={4}>
+    <Grid size={12}>
       <SoulforgeCard>
         <CardContent>
-          {aspirationSelect}
-          {aspirationNoteTextField}
-        </CardContent>
-      </SoulforgeCard>
-    </Grid>
+          <Grid container spacing={2}>
+            <Grid size={4}>
+              {aspirationSelect}
+            </Grid>
 
-    <Grid size={4}>
-      <SoulforgeCard>
-        <CardContent>
-          {coreValueSelect}
-          {coreValueNoteTextField}
-        </CardContent>
-      </SoulforgeCard>
-    </Grid>
+            <Grid size={4}>
+              {coreValueSelect}
+            </Grid>
 
-    <Grid size={4}>
-      <SoulforgeCard>
-        <CardContent>
-          {viceSelect}
-          {viceNoteTextField}
+            <Grid size={4}>
+              {viceSelect}
+            </Grid>
+          </Grid>
         </CardContent>
       </SoulforgeCard>
     </Grid>

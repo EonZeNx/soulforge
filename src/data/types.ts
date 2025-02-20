@@ -106,6 +106,18 @@ export type Trait = {
   tag: TagReference;
 };
 
+export type Attribute = {
+  id: number;
+  name: string;
+  description?: string;
+};
+
+export type CharacterAttribute = {
+  id: number;
+  value: number;
+  flow: number;
+};
+
 export type Resource = {
   name: string;
   value: number;
@@ -119,18 +131,9 @@ export type Resource = {
 export type CharacterLore = {
   name: string;
   true_name: string;
-  aspiration: {
-    id: number; // references TagId
-    note: string;
-  };
-  core_value: {
-    id: number; // references TagId
-    note: string;
-  };
-  vice: {
-    id: number; // references TagId
-    note: string;
-  };
+  aspiration: number; // references TagId
+  core_value: number; // references TagId
+  vice: number; // references TagId
 };
 
 export type CharacterTag = {
@@ -189,6 +192,7 @@ export type CharacterAffliction = {
 export type Character = {
   id: number;
   lore: CharacterLore;
+  attributes: CharacterAttribute[];
   keystone: CharacterKeystone;
   archetype: CharacterArchetype;
   kinfolk: CharacterKinfolk;
@@ -196,4 +200,5 @@ export type Character = {
   temporary_tags: TemporaryTag[];
   afflictions: CharacterAffliction[];
   resources: CharacterResources;
+  notes: string;
 };

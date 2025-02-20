@@ -8,7 +8,6 @@ import {
 import Grid from '@mui/material/Grid2';
 import DiamondIcon from '@mui/icons-material/Diamond';
 import BedtimeIcon from '@mui/icons-material/Bedtime';
-import TsunamiIcon from '@mui/icons-material/Tsunami';
 import {Resource} from "@/components/character/resource/resource";
 import {useCharacterContext} from "@/context/character/character-context";
 import {useBreakpointMediaQuery} from "@/hooks/use-screen-breakpoints";
@@ -39,10 +38,6 @@ export function Resources({sx}: Props) {
     return <BedtimeIcon {...props}/>;
   };
 
-  const renderTsunamiIcon = (props: SvgIconProps) => {
-    return <TsunamiIcon {...props}/>;
-  };
-
   return (
     <Box sx={sx}>
       <Typography
@@ -66,42 +61,6 @@ export function Resources({sx}: Props) {
           <Resource
             name="Downtime"
             renderIcon={renderBedtimeIcon}
-            value={downtime}
-            onUpdate={(newValue: number) => character.updateDowntime(newValue)}
-          />
-        </Grid>
-
-        <Grid size={cardSize}>
-          <Resource
-            name="Flow 01"
-            renderIcon={renderTsunamiIcon}
-            value={downtime}
-            onUpdate={(newValue: number) => character.updateDowntime(newValue)}
-          />
-        </Grid>
-
-        <Grid size={cardSize}>
-          <Resource
-            name="Flow 02"
-            renderIcon={renderTsunamiIcon}
-            value={downtime}
-            onUpdate={(newValue: number) => character.updateDowntime(newValue)}
-          />
-        </Grid>
-
-        <Grid size={cardSize}>
-          <Resource
-            name="Flow 03"
-            renderIcon={renderTsunamiIcon}
-            value={downtime}
-            onUpdate={(newValue: number) => character.updateDowntime(newValue)}
-          />
-        </Grid>
-
-        <Grid size={cardSize}>
-          <Resource
-            name="Flow 04"
-            renderIcon={renderTsunamiIcon}
             value={downtime}
             onUpdate={(newValue: number) => character.updateDowntime(newValue)}
           />

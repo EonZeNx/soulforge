@@ -9,6 +9,7 @@ import {archetypes} from "@/data/v1/archetypes";
 import {keystones} from "@/data/v1/keystones";
 import {kinfolks} from "@/data/v1/kinfolks";
 import {isNull} from "@/libraries/general";
+import {attributes} from "@/data/v1/attributes";
 
 
 const CHARACTER_STORAGE_KEY = 'characters';
@@ -71,7 +72,7 @@ export function CharacterProvider({ children }: Props) {
       return;
     }
 
-    characters[index].lore.aspiration.id = id;
+    characters[index].lore.aspiration = id;
 
     charactersUpdate(characters);
   }, [
@@ -89,7 +90,7 @@ export function CharacterProvider({ children }: Props) {
       return;
     }
 
-    characters[index].lore.core_value.id = id;
+    characters[index].lore.core_value = id;
 
     charactersUpdate(characters);
   }, [
@@ -107,7 +108,7 @@ export function CharacterProvider({ children }: Props) {
       return;
     }
 
-    characters[index].lore.vice.id = id;
+    characters[index].lore.vice = id;
 
     charactersUpdate(characters);
   }, [
@@ -117,7 +118,7 @@ export function CharacterProvider({ children }: Props) {
     getSelectedCharacterIndex
   ]);
 
-  const updateAspirationNote = useCallback((value: string) => {
+  const updateNotes = useCallback((value: string) => {
     const index = getSelectedCharacterIndex();
 
     if (index < 0) {
@@ -125,7 +126,7 @@ export function CharacterProvider({ children }: Props) {
       return;
     }
 
-    characters[index].lore.aspiration.note = value;
+    characters[index].notes = value;
 
     charactersUpdate(characters);
   }, [
@@ -135,7 +136,9 @@ export function CharacterProvider({ children }: Props) {
     getSelectedCharacterIndex
   ]);
 
-  const updateCoreValueNote = useCallback((value: string) => {
+
+  // Attributes
+  const updateAttributeValue = useCallback((id: number, value: number) => {
     const index = getSelectedCharacterIndex();
 
     if (index < 0) {
@@ -143,7 +146,13 @@ export function CharacterProvider({ children }: Props) {
       return;
     }
 
-    characters[index].lore.core_value.note = value;
+    const attributeIndex = attributes.findIndex(a => a.id === id);
+    if (attributeIndex < 0 || attributeIndex >= characters[index].attributes.length) {
+      console.error(`failed to find keystone with id ${id}`);
+      return;
+    }
+
+    characters[index].attributes[attributeIndex].value = value;
 
     charactersUpdate(characters);
   }, [
@@ -153,7 +162,7 @@ export function CharacterProvider({ children }: Props) {
     getSelectedCharacterIndex
   ]);
 
-  const updateViceNote = useCallback((value: string) => {
+  const updateAttributeFlow = useCallback((id: number, flow: number) => {
     const index = getSelectedCharacterIndex();
 
     if (index < 0) {
@@ -161,7 +170,13 @@ export function CharacterProvider({ children }: Props) {
       return;
     }
 
-    characters[index].lore.vice.note = value;
+    const attributeIndex = attributes.findIndex(a => a.id === id);
+    if (attributeIndex < 0 || attributeIndex >= characters[index].attributes.length) {
+      console.error(`failed to find keystone with id ${id}`);
+      return;
+    }
+
+    characters[index].attributes[attributeIndex].flow = flow;
 
     charactersUpdate(characters);
   }, [
@@ -589,9 +604,10 @@ export function CharacterProvider({ children }: Props) {
       updateAspiration: updateAspiration,
       updateCoreValue: updateCoreValue,
       updateVice: updateVice,
-      updateAspirationNote: updateAspirationNote,
-      updateCoreValueNote: updateCoreValueNote,
-      updateViceNote: updateViceNote,
+      updateNotes: updateNotes,
+
+      updateAttributeValue: updateAttributeValue,
+      updateAttributeFlow: updateAttributeFlow,
 
       updateFate: updateFate,
       updateDowntime: updateDowntime,
@@ -624,9 +640,10 @@ export function CharacterProvider({ children }: Props) {
     updateAspiration,
     updateCoreValue,
     updateVice,
-    updateAspirationNote,
-    updateCoreValueNote,
-    updateViceNote,
+    updateNotes,
+
+    updateAttributeValue,
+    updateAttributeFlow,
 
     updateFate,
     updateDowntime,

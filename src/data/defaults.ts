@@ -21,18 +21,9 @@ export const DEFAULT_CHARACTER: Character = {
   lore: {
     name: "",
     true_name: "",
-    aspiration: {
-      id: 0,
-      note: ""
-    },
-    core_value: {
-      id: 0,
-      note: ""
-    },
-    vice: {
-      id: 0,
-      note: ""
-    }
+    aspiration: -1,
+    core_value: -1,
+    vice: -1
   },
   resources: {
     fate: {
@@ -52,7 +43,26 @@ export const DEFAULT_CHARACTER: Character = {
     other: []
   },
   temporary_tags: [],
-  traits: []
+  traits: [],
+  notes: "",
+  attributes: [
+    {
+      id: 0,
+      value: 6
+    },
+    {
+      id: 1,
+      value: 6
+    },
+    {
+      id: 2,
+      value: 6
+    },
+    {
+      id: 3,
+      value: 6
+    },
+  ],
 };
 
 export const DEFAULT_TAG: Tag = {

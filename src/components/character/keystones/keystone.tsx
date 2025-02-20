@@ -4,7 +4,7 @@ import {
   Box,
   Stack,
   Typography,
-  SxProps, useTheme, Card, CardContent
+  SxProps, useTheme, CardContent
 } from "@mui/material";
 import Grid from '@mui/material/Grid2';
 import {CharacterTagCard} from "@/components/character/character-tag-card";

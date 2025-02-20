@@ -14,6 +14,8 @@ import {Resources} from "@/components/character/resource/resources";
 import {CharacterProvider} from "@/context/character/character-provider";
 import {useBreakpointMediaQuery} from "@/hooks/use-screen-breakpoints";
 import {MainHeader} from "@/components/main/main-header";
+import {Attributes} from "@/components/character/attributes/attributes";
+import {Notes} from "@/components/character/notes";
 
 
 export default function Home() {
@@ -37,9 +39,18 @@ export default function Home() {
       </TabList>
     </Box>
 
-    <TabPanel value="1">
+    <TabPanel
+      value="1"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 2
+      }}
+    >
       <Lore/>
-      <Resources sx={{mt: 4}}/>
+      <Attributes/>
+      <Notes/>
+      <Resources/>
     </TabPanel>
 
     <TabPanel value="2">
@@ -74,9 +85,18 @@ export default function Home() {
       </TabList>
     </Box>
 
-    <TabPanel value="1">
+    <TabPanel
+      value="1"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        gap: 3
+      }}
+    >
       <Lore/>
-      <Resources sx={{mt: 4}}/>
+      <Attributes/>
+      <Notes/>
+      <Resources/>
     </TabPanel>
 
     <TabPanel value="2">

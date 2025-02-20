@@ -4,7 +4,6 @@ import {
   Box,
   Stack,
   Typography,
-  Card,
   CardContent,
   SxProps, useTheme
 } from "@mui/material";

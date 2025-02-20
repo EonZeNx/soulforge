@@ -17,7 +17,7 @@ export default function Page() {
       <main style={{width: "1200px"}}>
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <TabList onChange={handleChange} >
+            <TabList onChange={handleChange}>
               <Tab label="Tags" value="1" />
             </TabList>
           </Box>
