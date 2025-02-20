@@ -48,19 +48,23 @@ export const DEFAULT_CHARACTER: Character = {
   attributes: [
     {
       id: 0,
-      value: 6
+      value: 6,
+      flow: 0
     },
     {
       id: 1,
-      value: 6
+      value: 6,
+      flow: 0
     },
     {
       id: 2,
-      value: 6
+      value: 6,
+      flow: 0
     },
     {
       id: 3,
-      value: 6
+      value: 6,
+      flow: 0
     },
   ],
 };
