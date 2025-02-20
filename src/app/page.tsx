@@ -8,7 +8,7 @@ import {Archetype} from "@/components/character/archetypes/archetype";
 import {Keystone} from "@/components/character/keystones/keystone";
 import {Kinfolk} from "@/components/character/kinfolk/kinfolk";
 import {TemporaryTags} from "@/components/character/temporary-tags/temporary-tags";
-import {Afflictions} from "@/components/character/afflictions";
+import {Afflictions} from "@/components/character/afflictions/afflictions";
 import Grid from "@mui/material/Grid2";
 import {Resources} from "@/components/character/resource/resources";
 import {CharacterProvider} from "@/context/character/character-provider";

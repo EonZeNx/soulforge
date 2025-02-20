@@ -178,6 +178,14 @@ export type TemporaryTag = {
   stacks: number;
 };
 
+export type CharacterAffliction = {
+  id?: number; // references AfflictionId
+  data?: {
+    name: string;
+    description?: string;
+  };
+};
+
 export type Character = {
   id: number;
   lore: CharacterLore;
@@ -186,6 +194,6 @@ export type Character = {
   kinfolk: CharacterKinfolk;
   traits: CharacterTrait[];
   temporary_tags: TemporaryTag[];
-  afflictions: number[]; // references AfflictionId
+  afflictions: CharacterAffliction[];
   resources: CharacterResources;
 };

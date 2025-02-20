@@ -1,12 +1,11 @@
 'use client';
 
 import {
-  SxProps, CardContent, Stack, IconButton, Typography, TextField, Collapse, IconButtonProps, styled
+  SxProps, CardContent, Stack, IconButton, TextField, Collapse, IconButtonProps, styled
 } from "@mui/material";
 import {SoulforgeCard} from "@/components/soulforge-card";
 import {tags} from "@/data/v1/tags";
-import {TemporaryTag} from "@/data/types";
-import AddIcon from "@mui/icons-material/Add";
+import {CharacterAffliction} from "@/data/types";
 import RemoveIcon from '@mui/icons-material/Remove';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {useCharacterContext} from "@/context/character/character-context";
@@ -44,51 +43,45 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 
 
 type Props = {
-  temporaryTag: TemporaryTag;
+  affliction: CharacterAffliction;
   index: number;
   sx?: SxProps;
 };
 
-export function TemporaryTagCard({temporaryTag, index, sx}: Props) {
+export function AfflictionsCard({affliction, index, sx}: Props) {
   const character = useCharacterContext();
   const [showDescription, setShowDescription] = useState(false);
 
-  const updateStacks = (stacks: number) => {
-    character.updateTemporaryTag(index, {...temporaryTag, stacks: stacks});
-  };
-
   const updateName = (name: string) => {
     const newState = {
-      stacks: 0,
       data: {
         name: name,
-        description: temporaryTag.data?.description,
+        description: affliction.data?.description,
       }
     };
 
-    character.updateTemporaryTag(index, newState);
+    character.updateAffliction(index, newState);
   }
 
   const updateDescription = (description: string) => {
     const newState = {
-      stacks: 0,
       data: {
-        name: temporaryTag.data?.name ?? "failed",
+        name: affliction.data?.name ?? "failed",
         description: description,
       }
     };
 
-    character.updateTemporaryTag(index, newState);
+    character.updateAffliction(index, newState);
+  }
+
+  const removeAffliction = () => {
+    character.removeAffliction(index);
   }
 
   const actions = (
     <Stack direction="row" alignItems="center" spacing={0}>
-      <IconButton onClick={() => updateStacks(-1)}>
+      <IconButton onClick={() => removeAffliction()}>
         <RemoveIcon/>
-      </IconButton>
-
-      <IconButton onClick={() => updateStacks(1)}>
-        <AddIcon/>
       </IconButton>
     </Stack>
   );
@@ -96,15 +89,15 @@ export function TemporaryTagCard({temporaryTag, index, sx}: Props) {
   let name: string | undefined = "";
   let description: string | undefined = "";
 
-  if (!isNull(temporaryTag.id)) {
-    const tag = tags.find((t) => t.id === temporaryTag.id);
+  if (!isNull(affliction.id)) {
+    const tag = tags.find((t) => t.id === affliction.id);
 
     name = tag?.name;
     description = tag?.description;
   }
-  else if (!isNull(temporaryTag.data)) {
-    name = temporaryTag.data?.name;
-    description = temporaryTag.data?.description;
+  else if (!isNull(affliction.data)) {
+    name = affliction.data?.name;
+    description = affliction.data?.description;
   }
 
   const title = (
@@ -116,13 +109,6 @@ export function TemporaryTagCard({temporaryTag, index, sx}: Props) {
         onChange={e => updateName(e.target.value)}
         fullWidth
       />
-      <Typography
-        variant="body1"
-        color="textSecondary"
-        sx={{minWidth: "fit-content"}}
-      >
-        x {temporaryTag.stacks}
-      </Typography>
     </Stack>
   );
 

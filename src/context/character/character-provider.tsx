@@ -2,7 +2,7 @@
 
 import {PropsWithChildren, useCallback, useMemo} from "react";
 import {CharacterContext} from "@/context/character/character-context";
-import {Character, TemporaryTag} from "@/data/types";
+import {Character, CharacterAffliction, TemporaryTag} from "@/data/types";
 import {useLocalStorage} from "usehooks-ts";
 import {DEFAULT_CHARACTER, DEFAULT_CHARACTER_ABILITY} from "@/data/defaults";
 import {archetypes} from "@/data/v1/archetypes";
@@ -442,7 +442,7 @@ export function CharacterProvider({ children }: Props) {
   ]);
 
 
-
+  // Temporary tags
   const addTemporaryTag = useCallback((temporaryTag: TemporaryTag) => {
     const index = getSelectedCharacterIndex();
 
@@ -499,6 +499,79 @@ export function CharacterProvider({ children }: Props) {
   ]);
 
 
+  // Afflictions
+  const addAffliction = useCallback((affliction: CharacterAffliction) => {
+    const index = getSelectedCharacterIndex();
+
+    if (index < 0) {
+      console.error(`failed to find character with id ${selectedCharacter}`);
+      return -1;
+    }
+
+    characters[index].afflictions.push(affliction);
+    const afflictionIndex = characters[index].afflictions.length - 1;
+
+    charactersUpdate(characters);
+
+    return afflictionIndex;
+  }, [
+    characters,
+    charactersUpdate,
+    selectedCharacter,
+    getSelectedCharacterIndex
+  ]);
+
+  const updateAffliction = useCallback((afflictionIndex: number, affliction: CharacterAffliction) => {
+    const index = getSelectedCharacterIndex();
+
+    if (index < 0) {
+      console.error(`failed to find character with id ${selectedCharacter}`);
+      return;
+    }
+
+    if (afflictionIndex < 0 || afflictionIndex >= characters[index].afflictions.length) {
+      console.error(`index ${afflictionIndex} outside afflictions bounds`);
+      return;
+    }
+
+    characters[index].afflictions[afflictionIndex].id = affliction.id;
+
+    if (isNull(affliction.id)) {
+      characters[index].afflictions[afflictionIndex].data = affliction.data;
+    }
+
+    charactersUpdate(characters);
+  }, [
+    characters,
+    charactersUpdate,
+    selectedCharacter,
+    getSelectedCharacterIndex
+  ]);
+
+  const removeAffliction = useCallback((afflictionIndex: number) => {
+    const index = getSelectedCharacterIndex();
+
+    if (index < 0) {
+      console.error(`failed to find character with id ${selectedCharacter}`);
+      return;
+    }
+
+    if (afflictionIndex < 0 || afflictionIndex >= characters[index].afflictions.length) {
+      console.error(`index ${afflictionIndex} outside afflictions bounds`);
+      return;
+    }
+
+    characters[index].afflictions.splice(afflictionIndex, 1);
+
+    charactersUpdate(characters);
+  }, [
+    characters,
+    charactersUpdate,
+    selectedCharacter,
+    getSelectedCharacterIndex
+  ]);
+
+
   const memo = useMemo(() => {
     const index = getSelectedCharacterIndex();
     const character = index < 0 ? null : characters[index];
@@ -535,6 +608,10 @@ export function CharacterProvider({ children }: Props) {
 
       addTemporaryTag: addTemporaryTag,
       updateTemporaryTag: updateTemporaryTag,
+
+      addAffliction: addAffliction,
+      updateAffliction: updateAffliction,
+      removeAffliction: removeAffliction,
     };
   }, [
     characters,
@@ -566,6 +643,10 @@ export function CharacterProvider({ children }: Props) {
 
     addTemporaryTag,
     updateTemporaryTag,
+
+    addAffliction,
+    updateAffliction,
+    removeAffliction,
   ]);
 
   return (

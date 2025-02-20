@@ -1,4 +1,4 @@
-import {Character, TemporaryTag} from "@/data/types";
+import {Character, CharacterAffliction, TemporaryTag} from "@/data/types";
 
 export type CharacterValueProps = {
   character: Character | null;
@@ -48,6 +48,12 @@ export type CharacterContextProps = {
   // updateTrait: (oldId: number, newId: number) => void;
   // updateTraitAbility: (id: number, value: {unlocked?: boolean, exhausted?: boolean}) => void;
 
+  // Temporary tags
   addTemporaryTag: (temporaryTag: TemporaryTag) => number;
   updateTemporaryTag: (temporaryTagIndex: number, temporaryTag: TemporaryTag) => void;
+
+  // Afflictions
+  addAffliction: (affliction: CharacterAffliction) => number;
+  updateAffliction: (afflictionIndex: number, affliction: CharacterAffliction) => void;
+  removeAffliction: (afflictionIndex: number) => void;
 } & CharacterValueProps;
