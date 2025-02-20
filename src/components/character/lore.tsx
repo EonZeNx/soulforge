@@ -16,7 +16,6 @@ import {vices} from "@/data/v1/vices";
 import {SoulforgeCard} from "@/components/soulforge-card";
 import {useBreakpointMediaQuery} from "@/hooks/use-screen-breakpoints";
 import {SelectRenderSubtitle} from "@/components/select-render-subtitle";
-import {Notes} from "@/components/character/notes";
 
 type Props = {
   sx?: SxProps;
