@@ -9,13 +9,13 @@ import {Keystone} from "@/components/character/keystones/keystone";
 import {Kinfolk} from "@/components/character/kinfolk/kinfolk";
 import {TemporaryTags} from "@/components/character/temporary-tags/temporary-tags";
 import {Afflictions} from "@/components/character/afflictions/afflictions";
-import Grid from "@mui/material/Grid2";
 import {Resources} from "@/components/character/resource/resources";
 import {CharacterProvider} from "@/context/character/character-provider";
 import {useBreakpointMediaQuery} from "@/hooks/use-screen-breakpoints";
 import {MainHeader} from "@/components/main/main-header";
 import {Attributes} from "@/components/character/attributes/attributes";
 import {Notes} from "@/components/character/notes";
+import {DiceRoller} from "@/components/data/dice/dice-roller";
 
 
 export default function Home() {
@@ -36,21 +36,15 @@ export default function Home() {
         <Tab label="Kinfolk" value="4"/>
         <Tab label="Temporary Tags" value="5"/>
         <Tab label="Afflictions" value="6"/>
+        <Tab label="Dice" value="7"/>
       </TabList>
     </Box>
 
-    <TabPanel
-      value="1"
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 2
-      }}
-    >
-      <Lore/>
-      <Attributes/>
-      <Notes/>
-      <Resources/>
+    <TabPanel value="1">
+      <Lore sx={{mt: 3}}/>
+      <Attributes sx={{mt: 3}}/>
+      <Notes sx={{mt: 3}}/>
+      <Resources sx={{mt: 3}}/>
     </TabPanel>
 
     <TabPanel value="2">
@@ -72,6 +66,10 @@ export default function Home() {
     <TabPanel value="6">
       <Afflictions/>
     </TabPanel>
+
+    <TabPanel value="7">
+      <DiceRoller/>
+    </TabPanel>
   </>);
 
   const mediumLayout = (<>
@@ -81,22 +79,17 @@ export default function Home() {
         <Tab label="Keystone" value="2"/>
         <Tab label="Archetype" value="3"/>
         <Tab label="Kinfolk" value="4"/>
-        <Tab label="Status" value="5"/>
+        <Tab label="Temporary Tags" value="5"/>
+        <Tab label="Afflictions" value="6"/>
+        <Tab label="Dice" value="7"/>
       </TabList>
     </Box>
 
-    <TabPanel
-      value="1"
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        gap: 3
-      }}
-    >
+    <TabPanel value="1">
       <Lore/>
-      <Attributes/>
-      <Notes/>
-      <Resources/>
+      <Attributes sx={{mt: 3}}/>
+      <Notes sx={{mt: 3}}/>
+      <Resources sx={{mt: 3}}/>
     </TabPanel>
 
     <TabPanel value="2">
@@ -112,15 +105,15 @@ export default function Home() {
     </TabPanel>
 
     <TabPanel value="5">
-      <Grid container spacing={2}>
-        <Grid size={6}>
-          <TemporaryTags/>
-        </Grid>
+      <TemporaryTags/>
+    </TabPanel>
 
-        <Grid size={6}>
-          <Afflictions/>
-        </Grid>
-      </Grid>
+    <TabPanel value="6">
+      <Afflictions/>
+    </TabPanel>
+
+    <TabPanel value="7">
+      <DiceRoller/>
     </TabPanel>
   </>);
 
