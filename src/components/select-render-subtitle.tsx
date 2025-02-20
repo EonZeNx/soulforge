@@ -15,7 +15,7 @@ export function SelectRenderSubtitle({label, value, updateValue, valueList}: Pro
       return object.name;
     }
 
-    return value;
+    return "Custom";
   };
 
   return (
@@ -28,7 +28,7 @@ export function SelectRenderSubtitle({label, value, updateValue, valueList}: Pro
         renderValue={renderValue}
         onChange={e => updateValue(typeof e.target.value === 'string' ? parseInt(e.target.value, 10) : e.target.value)}
       >
-        <MenuItem value="-1">Custom</MenuItem>
+        <MenuItem value={-1}>Custom</MenuItem>
         {valueList.map(a => (
           <MenuItem
             key={a.id}
