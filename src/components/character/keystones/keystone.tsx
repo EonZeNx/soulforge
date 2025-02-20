@@ -14,6 +14,7 @@ import {keystones} from "@/data/v1/keystones";
 import {KeystoneModal} from "@/components/character/keystones/keystone-modal";
 import {ETagCategories} from "@/data/types";
 import {tags} from "@/data/v1/tags";
+import {SoulforgeCard} from "@/components/soulforge-card";
 
 type Props = {
   sx?: SxProps;
@@ -69,11 +70,11 @@ export function Keystone({sx}: Props) {
     )
     : (
       <Grid size={12}>
-        <Card>
+        <SoulforgeCard>
           <CardContent sx={{display: "flex", justifyContent: "center"}}>
-            <Typography variant="h6" fontStyle="italic">No abilities found</Typography>
+            <Typography variant="body1" fontStyle="italic">No abilities found</Typography>
           </CardContent>
-        </Card>
+        </SoulforgeCard>
       </Grid>
     );
 

@@ -14,6 +14,7 @@ import {useCharacterContext} from "@/context/character/character-context";
 import {archetypes} from "@/data/v1/archetypes";
 import {CharacterTagCard} from "@/components/character/character-tag-card";
 import {useBreakpointMediaQuery} from "@/hooks/use-screen-breakpoints";
+import {SoulforgeCard} from "@/components/soulforge-card";
 
 type Props = {
   sx?: SxProps;
@@ -59,11 +60,11 @@ export function Archetype({sx}: Props) {
     )
     : (
       <Grid size={12}>
-        <Card>
+        <SoulforgeCard>
           <CardContent sx={{display: "flex", justifyContent: "center"}}>
-            <Typography variant="h6" fontStyle="italic">No abilities found</Typography>
+            <Typography variant="body1" fontStyle="italic">No abilities found</Typography>
           </CardContent>
-        </Card>
+        </SoulforgeCard>
       </Grid>
     );
 

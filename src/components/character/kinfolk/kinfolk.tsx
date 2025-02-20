@@ -61,7 +61,7 @@ export function Kinfolk({sx}: Props) {
       <Grid size={12}>
         <SoulforgeCard>
           <CardContent sx={{display: "flex", justifyContent: "center"}}>
-            <Typography variant="h6" fontStyle="italic">No abilities found</Typography>
+            <Typography variant="body1" fontStyle="italic">No abilities found</Typography>
           </CardContent>
         </SoulforgeCard>
       </Grid>

@@ -3,12 +3,13 @@
 import {
   Box,
   Typography,
-  SxProps, Button
+  SxProps, Button, CardContent
 } from "@mui/material";
 import Grid from '@mui/material/Grid2';
 import AddIcon from '@mui/icons-material/Add';
 import {useCharacterContext} from "@/context/character/character-context";
 import {TemporaryTagCard} from "@/components/character/temporary-tags/temporary-tags-card";
+import {SoulforgeCard} from "@/components/soulforge-card";
 
 type Props = {
   sx?: SxProps;
@@ -35,19 +36,29 @@ export function TemporaryTags({sx}: Props) {
     </Button>
   );
 
-  const temporaryTagList = (
-    <>
-      {character.character?.temporary_tags.map((tt, i) => (
-        <Grid size={12} key={i}>
-          <TemporaryTagCard
-            temporaryTag={tt}
-            index={i}
-            sx={{height: "100%"}}
-          />
-        </Grid>
-      ))}
-    </>
-  );
+  const temporaryTagList = (character.character?.temporary_tags ?? []).length !== 0
+    ? (
+      <>
+        {character.character?.temporary_tags.map((tt, i) => (
+          <Grid size={12} key={i}>
+            <TemporaryTagCard
+              temporaryTag={tt}
+              index={i}
+              sx={{height: "100%"}}
+            />
+          </Grid>
+        ))}
+      </>
+    )
+    : (
+      <Grid size={12}>
+        <SoulforgeCard>
+          <CardContent sx={{display: "flex", justifyContent: "center"}}>
+            <Typography variant="body1" fontStyle="italic">No tags found</Typography>
+          </CardContent>
+        </SoulforgeCard>
+      </Grid>
+    );
 
   return (
     <Box sx={sx}>
