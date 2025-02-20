@@ -16,7 +16,11 @@ type Props = {
 };
 
 export function DiceCard({diceResult, threshold, onExplode, sx}: Props) {
-  const successes = Math.floor(diceResult.result / threshold);
+  let successes = Math.floor(diceResult.result / threshold);
+
+  if (diceResult.explode.length > 0) {
+    successes += diceResult.explode.reduce((acc, edr) => acc + Math.floor(edr / threshold), 0);
+  }
 
   const results = `${diceResult.result}` + diceResult.explode.reduce((acc, e) => `${acc} + ${e}`, '');
   const canExplode = (diceResult.result === diceResult.size && diceResult.explode.length === 0) ||

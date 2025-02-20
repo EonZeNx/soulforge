@@ -34,10 +34,13 @@ export function DiceRoller({sx}: Props) {
 
   const threshold = clamp(5 - edges, 1, 10);
   const successes = diceResults.reduce((acc, dr) => {
-    const diceSuccesses = Math.floor(dr.result / threshold);
-    if (diceSuccesses > 0)
-      return acc + diceSuccesses;
-    return acc;
+    let diceSuccesses = Math.floor(dr.result / threshold);
+
+    if (dr.explode.length > 0) {
+      diceSuccesses += dr.explode.reduce((acc, edr) => acc + Math.floor(edr / threshold), 0);
+    }
+
+    return acc + diceSuccesses;
   }, 0);
 
   const updateEdge = (value: number) => {
